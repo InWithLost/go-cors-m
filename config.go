@@ -8,13 +8,14 @@ import (
 )
 
 type cors struct {
-	allowAllOrigins  bool
-	allowCredentials bool
-	allowOriginFunc  func(string) bool
-	allowOrigins     []string
-	normalHeaders    http.Header
-	preflightHeaders http.Header
-	wildcardOrigins  [][]string
+	allowAllOrigins  	bool
+	AllowPrivateNetwork	bool
+	allowCredentials 	bool
+	allowOriginFunc  	func(string) bool
+	allowOrigins     	[]string
+	normalHeaders    	http.Header
+	preflightHeaders 	http.Header
+	wildcardOrigins  	[][]string
 }
 
 var (
@@ -49,13 +50,14 @@ func newCors(config Config) *cors {
 	}
 
 	return &cors{
-		allowOriginFunc:  config.AllowOriginFunc,
-		allowAllOrigins:  config.AllowAllOrigins,
-		allowCredentials: config.AllowCredentials,
-		allowOrigins:     normalize(config.AllowOrigins),
-		normalHeaders:    generateNormalHeaders(config),
-		preflightHeaders: generatePreflightHeaders(config),
-		wildcardOrigins:  config.parseWildcardRules(),
+		allowOriginFunc:  	config.AllowOriginFunc,
+		allowAllOrigins:  	config.AllowAllOrigins,
+		AllowPrivateNetwork: 	config.AllowPrivateNetwork,
+		allowCredentials: 	config.AllowCredentials,
+		allowOrigins:     	normalize(config.AllowOrigins),
+		normalHeaders:    	generateNormalHeaders(config),
+		preflightHeaders: 	generatePreflightHeaders(config),
+		wildcardOrigins:  	config.parseWildcardRules(),
 	}
 }
 
