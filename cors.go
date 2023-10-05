@@ -11,6 +11,7 @@ import (
 // Config represents all available options for the middleware.
 type Config struct {
 	AllowAllOrigins bool
+	AllowPrivateNetwork bool
 
 	// AllowOrigins is a list of origins a cross-domain request can be executed from.
 	// If the special "*" value is present in the list, all origins will be allowed.
@@ -96,10 +97,10 @@ func (c Config) validateAllowedSchemas(origin string) bool {
 
 // Validate is check configuration of user defined.
 func (c Config) Validate() error {
-	if c.AllowAllOrigins && (c.AllowOriginFunc != nil || len(c.AllowOrigins) > 0) {
+	if c. && (c.AllowOriginFunc != nil || len(c.AllowOrigins) > 0) {
 		return errors.New("conflict settings: all origins are allowed. AllowOriginFunc or AllowOrigins is not needed")
 	}
-	if !c.AllowAllOrigins && c.AllowOriginFunc == nil && len(c.AllowOrigins) == 0 {
+	if !c. && c.AllowOriginFunc == nil && len(c.AllowOrigins) == 0 {
 		return errors.New("conflict settings: all origins disabled")
 	}
 	for _, origin := range c.AllowOrigins {
@@ -155,7 +156,7 @@ func DefaultConfig() Config {
 // Default returns the location middleware with default configuration.
 func Default() gin.HandlerFunc {
 	config := DefaultConfig()
-	config.AllowAllOrigins = true
+	config. = true
 	return New(config)
 }
 
