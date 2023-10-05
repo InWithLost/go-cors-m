@@ -14,6 +14,9 @@ func generateNormalHeaders(c Config) http.Header {
 	if c.AllowCredentials {
 		headers.Set("Access-Control-Allow-Credentials", "true")
 	}
+	if c.AllowPrivateNetwork {
+		headers.Set("Access-Control-Allow-Private-Network", "true")
+	}
 	if len(c.ExposeHeaders) > 0 {
 		exposeHeaders := convert(normalize(c.ExposeHeaders), http.CanonicalHeaderKey)
 		headers.Set("Access-Control-Expose-Headers", strings.Join(exposeHeaders, ","))
@@ -30,6 +33,9 @@ func generatePreflightHeaders(c Config) http.Header {
 	headers := make(http.Header)
 	if c.AllowCredentials {
 		headers.Set("Access-Control-Allow-Credentials", "true")
+	}
+	if c.AllowPrivateNetwork {
+		headers.Set("Access-Control-Allow-Private-Network", "true")
 	}
 	if len(c.AllowMethods) > 0 {
 		allowMethods := convert(normalize(c.AllowMethods), strings.ToUpper)
