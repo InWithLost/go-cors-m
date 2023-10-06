@@ -1,4 +1,4 @@
-module github.com/gin-contrib/cors
+module github.com/inwithlost/go-cors-m
 
 go 1.18
 
