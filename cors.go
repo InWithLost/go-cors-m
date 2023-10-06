@@ -156,7 +156,7 @@ func DefaultConfig() Config {
 // Default returns the location middleware with default configuration.
 func Default() gin.HandlerFunc {
 	config := DefaultConfig()
-	config. = true
+	config.AllowAllOrigins = true
 	return New(config)
 }
 
