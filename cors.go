@@ -97,10 +97,10 @@ func (c Config) validateAllowedSchemas(origin string) bool {
 
 // Validate is check configuration of user defined.
 func (c Config) Validate() error {
-	if c. && (c.AllowOriginFunc != nil || len(c.AllowOrigins) > 0) {
+	if c.AllowAllOrigins && (c.AllowOriginFunc != nil || len(c.AllowOrigins) > 0) {
 		return errors.New("conflict settings: all origins are allowed. AllowOriginFunc or AllowOrigins is not needed")
 	}
-	if !c. && c.AllowOriginFunc == nil && len(c.AllowOrigins) == 0 {
+	if !c.AllowAllOrigins && c.AllowOriginFunc == nil && len(c.AllowOrigins) == 0 {
 		return errors.New("conflict settings: all origins disabled")
 	}
 	for _, origin := range c.AllowOrigins {
